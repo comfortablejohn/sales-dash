@@ -22,6 +22,11 @@ class CreateSalesTable extends Migration
                 ->references('id')
                 ->on('customers');
 
+            $table->bigInteger('product_id');
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products');
+
             $table->bigInteger('employee_id');
             $table->foreign('employee_id')
                 ->references('id')

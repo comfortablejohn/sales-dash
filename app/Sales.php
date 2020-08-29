@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cassandra\Custom;
 use Illuminate\Database\Eloquent\Model;
 
 class Sales extends Model
@@ -32,5 +33,15 @@ class Sales extends Model
     public function employee()
     {
         return $this->belongsTo(Employees::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Products::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customers::class);
     }
 }

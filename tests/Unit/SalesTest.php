@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
+use App\Customers;
 use App\Employees;
+use App\Products;
 use App\Sales;
 use Carbon\Carbon;
 use Tests\TestCase;
@@ -80,5 +82,29 @@ class SalesTest extends TestCase
         $this->assertNotEmpty($sale->employee);
         $this->assertEquals($employee->id, $sale->employee->id);
         $this->assertEquals($employee->name, $sale->employee->name);
+    }
+
+    public function test_get_customer_relation()
+    {
+        $customer = factory(Customers::class)->create();
+        $sale = factory(Sales::class)->create(
+            [
+                'customer_id' => $customer->id
+            ]
+        );
+        $relationCustomer = $sale->customer;
+        $this->assertEquals($customer->id, $relationCustomer->id);
+    }
+
+    public function test_get_product_relation()
+    {
+        $product = factory(Products::class)->create();
+        $sale = factory(Sales::class)->create(
+            [
+                'product_id' => $product->id
+            ]
+        );
+        $relationProduct = $sale->product;
+        $this->assertEquals($product->id, $relationProduct->id);
     }
 }
