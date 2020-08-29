@@ -15,8 +15,10 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
 
+            $table->string('invoice_id');
+
+            $table->date('date');
             $table->bigInteger('customer_id');
             $table->foreign('customer_id')
                 ->references('id')

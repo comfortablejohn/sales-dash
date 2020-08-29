@@ -29,8 +29,8 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->define(App\Sales::class, function (Faker $faker) {
     return [
-        'date' => \Carbon\Carbon::now(),
-        'employee_id' => factory(\App\Employees::class)->create()->id ,
+        'invoice_id' => "" . $faker->randomNumber(),
+        'employee_id' => factory(\App\Employees::class)->create()->id,
         'customer_id' => factory(\App\Customers::class)->create()->id,
         'product_id' => factory(\App\Products::class)->create()->id,
         'date' => $faker->date('Y-m-d'),
@@ -38,11 +38,21 @@ $factory->define(App\Sales::class, function (Faker $faker) {
 });
 
 $factory->define(App\Customers::class, function (Faker $faker) {
-    return [];
+    return [
+        'first_name' => $faker->name,
+        'last_name' => $faker->name,
+        'email' => $faker->email,
+        'gender' => $faker->randomElement(['Male', 'Female']),
+        'street' => $faker->streetAddress,
+        'city' => $faker->city,
+    ];
 });
 
 $factory->define(App\Products::class, function (Faker $faker) {
-    return [];
+    return [
+        'name' => $faker->name,
+        'price' => $faker->randomFloat(2, 0, 100),
+    ];
 });
 
 
