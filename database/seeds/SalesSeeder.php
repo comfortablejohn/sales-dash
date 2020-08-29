@@ -2,8 +2,9 @@
 use App\Products;
 use App\Customers;
 use App\Employees;
+use Carbon\Carbon;
 
-class ProductsSeeder extends CSVSeeder
+class SalesSeeder extends CSVSeeder
 {
     public string $table = 'sales';
     public string $filepath = "database/seeds/data/sales.csv";
@@ -11,12 +12,22 @@ class ProductsSeeder extends CSVSeeder
     public function transform($row)
     {
         $names = explode(' ', $row['customer name']);
-        $customer =
+
+        $first_name = array_shift($names);
+        $last_name = implode(' ', $names);
+        $customer = Customers::where('first_name', $first_name)->where('last_name', $last_name)->first();
+
+        $date = '';
+        if (isset($row['date'])) {
+            $date = Carbon::createFromFormat('d/m/y', $row['date']);
+        }
+
         return [
             'invoice_id' => $row['invoiceId'] ?? '',
-            'date' => $row['date'] ?? "",
-            'product_id' => Products::where('name', $row['name'])->first()->id,
-            'customer_id' =>
+            'date' => $date ?? "",
+            'product_id' => Products::where('name', $row['product_name'])->first()->id,
+            'customer_id' => $customer->id,
+            'employee_id' => Employees::where('name', $row['sales_person'])->first()->id,
         ];
     }
 }

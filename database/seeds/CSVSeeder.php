@@ -16,7 +16,11 @@ class CSVSeeder extends Seeder
     public function run()
     {
         $file = fopen(base_path($this->filepath), "r");
-        $header = fgetcsv($file);
+        $header = array_map(function ($colName) {
+            // clean up column names for invisible characters
+            return preg_replace('/[^A-Za-z0-9 _\-\+\&]/','', $colName);
+        }, fgetcsv($file));
+
         $data = [];
         $now = Carbon::now()->format('Y-m-d H:i:s');
         while ($row = fgetcsv($file)) {
