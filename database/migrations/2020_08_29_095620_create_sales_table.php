@@ -18,21 +18,11 @@ class CreateSalesTable extends Migration
 
             $table->string('invoice_id');
 
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('employee_id');
+
             $table->date('date');
-            $table->bigInteger('customer_id');
-            $table->foreign('customer_id')
-                ->references('id')
-                ->on('customers');
-
-            $table->bigInteger('product_id');
-            $table->foreign('product_id')
-                ->references('id')
-                ->on('products');
-
-            $table->bigInteger('employee_id');
-            $table->foreign('employee_id')
-                ->references('id')
-                ->on('employees');
 
             $table->timestamps();
         });
