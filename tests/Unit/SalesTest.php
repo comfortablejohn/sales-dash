@@ -18,12 +18,15 @@ class SalesTest extends TestCase
         $sales = factory(Sales::class)->createMany(
             [
                 [
+                    'employee_id' => 1,
                     'date' => Carbon::createFromFormat('Y-m-d', '2020-08-05'),
                 ],
                 [
+                    'employee_id' => 1,
                     'date' => Carbon::createFromFormat('Y-m-d', '2020-08-01'),
                 ],
                 [
+                    'employee_id' => 1,
                     'date' => Carbon::createFromFormat('Y-m-d', '2020-07-01'),
                 ]
             ]
@@ -43,6 +46,7 @@ class SalesTest extends TestCase
         $today = Carbon::now();
         $sale = factory(Sales::class)->create(
             [
+                'employee_id' => 1,
                 'date' => $today,
             ]
         );
