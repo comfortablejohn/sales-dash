@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\Builder;
 
 class Sales extends Model
 {
@@ -14,13 +16,15 @@ class Sales extends Model
     // Scopes
     //====================================================================
 
-    public function scopeByDateRange($query, $from, $to)
+    public function scopeByDateRange(Builder $query, Carbon $from, Carbon $to)
     {
-        return $query->where('date', '>=', $from)->where('date', '<=', $to)->orderBy('date', 'desc');
+        return $query
+            ->where('date', '>=', $from->startOfDay())
+            ->where('date', '<=', $to->endOfDay());
     }
 
     // this could just be replaced by relation on Employees maybe ($employee->sales->...)
-    public function scopeByEmployee($query, Employees $employee)
+    public function scopeByEmployee(Builder $query, Employees $employee)
     {
         return $query->where('employee_id', $employee->id);
     }

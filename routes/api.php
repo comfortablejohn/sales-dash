@@ -29,3 +29,7 @@ Route::group(['prefix' => 'customers'], function () {
 Route::group(['prefix' => 'employees'], function () {
     Route::get('/{employee}/sales', 'API\EmployeeSalesController@index');
 });
+
+Route::group(['prefix' => 'stats'], function () {
+    Route::get('/daily', 'API\StatsDaily@index');
+});
