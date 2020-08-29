@@ -20,7 +20,7 @@ class CreateCustomersTable extends Migration
             $table->string('last_name')->nullable();
 
             $table->string('email')->nullable();
-            $table->enum('gender', ['Male', 'Female'])->nullable();
+            $table->string('gender')->nullable();
 
             $table->string('street')->nullable();
             $table->string('city')->nullable();

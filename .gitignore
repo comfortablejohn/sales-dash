@@ -46,3 +46,4 @@ out/
 # Editor-based Rest Client
 .idea/httpRequests
 
+**/*.DS_STORE
