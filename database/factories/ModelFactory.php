@@ -26,3 +26,15 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->define(App\Sales::class, function (Faker $faker) {
+    return [
+        'date' => \Carbon\Carbon::now(),
+    ];
+});
+
+$factory->define(App\Employees::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});

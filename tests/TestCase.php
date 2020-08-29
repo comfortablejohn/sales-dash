@@ -2,9 +2,11 @@
 
 namespace Tests;
 
+use Illuminate\Testing\TestResponse;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Testing\TestResponse;
+use PHPUnit\Framework\Assert;
 
 abstract class TestCase extends BaseTestCase
 {
