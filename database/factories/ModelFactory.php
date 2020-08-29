@@ -30,7 +30,14 @@ $factory->define(User::class, function (Faker $faker) {
 $factory->define(App\Sales::class, function (Faker $faker) {
     return [
         'date' => \Carbon\Carbon::now(),
+        'employee_id' => factory(\App\Employees::class)->create()->id ,
+        'customer_id' => factory(\App\Customers::class)->create()->id,
+        'date' => $faker->date('Y-m-d'),
     ];
+});
+
+$factory->define(App\Customers::class, function (Faker $faker) {
+    return [];
 });
 
 $factory->define(App\Employees::class, function (Faker $faker) {

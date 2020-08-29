@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Sales;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ApiSalesTest extends TestCase
@@ -12,7 +10,7 @@ class ApiSalesTest extends TestCase
     public function test_view_sales()
     {
         $this->withoutExceptionHandling();
-        $sales = factory(Sales::class, 5)->create(['employee_id' => 1]);
+        $sales = factory(Sales::class, 5)->create();
 
         $response = $this->get('/api/sales');
 
@@ -28,7 +26,6 @@ class ApiSalesTest extends TestCase
 
         for ($i = 1; $i < 5; $i++) {
             $salesData[] = [
-                'employee_id' => 1,
                 'date' => '2020-08-' . $i,
             ];
         }

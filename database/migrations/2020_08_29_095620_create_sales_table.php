@@ -16,7 +16,17 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->date('date');
+
+            $table->bigInteger('customer_id');
+            $table->foreign('customer_id')
+                ->references('id')
+                ->on('customers');
+
             $table->bigInteger('employee_id');
+            $table->foreign('employee_id')
+                ->references('id')
+                ->on('employees');
+
             $table->timestamps();
         });
     }

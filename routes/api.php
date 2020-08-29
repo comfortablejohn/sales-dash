@@ -21,3 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'sales'], function () {
     Route::get('/', 'API\SalesController@index');
 });
+
+Route::group(['prefix' => 'customers'], function () {
+    Route::get('/{customer}/sales', 'API\CustomerSalesController@index');
+});
+
+Route::group(['prefix' => 'employees'], function () {
+    Route::get('/{employee}/sales', 'API\EmployeeSalesController@index');
+});

@@ -4,8 +4,6 @@ namespace Tests\Feature;
 
 use App\Sales;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class SalesDataGridTest extends TestCase
@@ -17,7 +15,23 @@ class SalesDataGridTest extends TestCase
         $to = Carbon::now();
         $from = Carbon::now()->subMonth();
 
-        $sales = factory(Sales::class, 4)->create(['employee_id' => 1]);
+        factory(Sales::class)->createMany(
+            [
+                [
+                    'date' => $to->copy()->subDay(),
+                ],
+                [
+                    'date' => $to->copy()->subDay(2),
+                ],
+                [
+                    'date' => $to->copy()->subDay(3),
+                ],
+                [
+                    // one out of range
+                    'date' => $to->copy()->subMonth(3),
+                ],
+            ]
+        );
 
         $salesData = Sales::byDateRange($from, $to)->get();
 
@@ -28,6 +42,7 @@ class SalesDataGridTest extends TestCase
         $injectedSales = $response->data('sales');
 
         $this->assertNotEmpty($injectedSales);
+        $this->assertCount(3, $injectedSales);
         $this->assertCount($salesData->count(), $injectedSales);
     }
 }

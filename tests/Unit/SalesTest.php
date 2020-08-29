@@ -18,15 +18,12 @@ class SalesTest extends TestCase
         $sales = factory(Sales::class)->createMany(
             [
                 [
-                    'employee_id' => 1,
                     'date' => Carbon::createFromFormat('Y-m-d', '2020-08-05'),
                 ],
                 [
-                    'employee_id' => 1,
                     'date' => Carbon::createFromFormat('Y-m-d', '2020-08-01'),
                 ],
                 [
-                    'employee_id' => 1,
                     'date' => Carbon::createFromFormat('Y-m-d', '2020-07-01'),
                 ]
             ]
@@ -46,7 +43,6 @@ class SalesTest extends TestCase
         $today = Carbon::now();
         $sale = factory(Sales::class)->create(
             [
-                'employee_id' => 1,
                 'date' => $today,
             ]
         );
@@ -66,9 +62,23 @@ class SalesTest extends TestCase
 
         $foundSales = Sales::byEmployee($employee)->get();
 
-        $this->assertEquals($salesByEmployee->count(), $foundSales->count());
+        $this->assertCount($salesByEmployee->count(), $foundSales);
         foreach ($foundSales as $sale) {
             $this->assertEquals($employee->id, $sale->employee_id);
         }
+    }
+
+    public function test_get_employee_relation()
+    {
+        $employee = factory(Employees::class)->create();
+        $sale = factory(Sales::class)->create(
+            [
+                'employee_id' => $employee->id,
+            ]
+        );
+
+        $this->assertNotEmpty($sale->employee);
+        $this->assertEquals($employee->id, $sale->employee->id);
+        $this->assertEquals($employee->name, $sale->employee->name);
     }
 }
