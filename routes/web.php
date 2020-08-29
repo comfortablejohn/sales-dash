@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/dashboard', 'SalesDashboardController@show');
+Route::get('/data', 'SalesDataGridController@show');
 
