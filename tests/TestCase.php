@@ -16,6 +16,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        $this->withoutExceptionHandling();
         // allows us to use $response->data($key) to check
         // data was passed to views
         TestResponse::macro('data', function ($key) {
