@@ -10,13 +10,22 @@
         top: 0;
         display: flex;
         z-index: 99;
+        font-size: 12px;
         background-color: $grey-white;
         justify-content: space-between;
+        padding: 8px 16px;
+        width: 100%;
+        border: 2px solid $grey-lighter;
+
 
         nav {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
+
+            > :not(:first-child) {
+                margin-left: 8px;
+            }
         }
     }
 
@@ -24,6 +33,7 @@
         position: relative;
         width: 100%;
         border-collapse: collapse;
+        background-color: #fff;
 
         thead {
             font-size: 0.8em;
@@ -32,12 +42,30 @@
                 color: $grey-dark;
                 text-align: left;
                 position: sticky;
-                top: 32px;
+                top: 39px;
+                padding: 8px 0;
+                &:first-child {
+                    padding-left: 16px;
+                }
             }
         }
 
         tbody {
             overflow: auto;
+            tr {
+                &:not(:first-child) {
+                    border-top: 2px solid $grey-lighter;
+                }
+            }
+
+            td {
+                padding-top: 8px;
+                padding-bottom: 8px;
+                &:first-child {
+                    padding-left: 16px;
+                }
+
+            }
         }
 
         ul {
@@ -61,11 +89,5 @@
         }
     }
 
-    .grid-pagination {
-        width: 100%;
-        display: flex;
-        border: 2px solid $grey-lighter;
-        height: 32px;
-    }
 }
 

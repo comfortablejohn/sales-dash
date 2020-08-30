@@ -47,10 +47,10 @@
                 sales: [],
                 filter: {
                     page: 1,
-                    fromDate: "2020-08-01",
-                    toDate: "2020-08-30",
-                    employeeSearchString: "",
-                    customerSearchString: "",
+                    fromDate: "",
+                    toDate: "",
+                    employeeId: "",
+                    customerId: "",
                 },
                 pagination: {}
             };
@@ -77,13 +77,13 @@
                 this.setFilter('fromDate', dates.from);
                 this.setFilter('toDate', dates.to);
             },
-            onEmployeeChange(employeeSearchString) {
+            onEmployeeChange(employeeId) {
                 console.log('update employee');
-                console.log(employeeSearchString);
-                this.setFilter('employeeSearchString', employeeSearchString);
+                console.log(employeeId);
+                this.setFilter('employeeId', employeeId);
             },
-            onCustomerChange(customerSearchString) {
-                this.setFilter('customerSearchString', customerSearchString);
+            onCustomerChange(customerId) {
+                this.setFilter('customerId', customerId);
             },
             setFilter(key, value) {
                 const newFilterData = {};
@@ -101,8 +101,8 @@
                 getSales({
                     from: this.filter.fromDate,
                     to: this.filter.toDate,
-                    customer: this.filter.customerSearchString,
-                    employee: this.filter.employeeSearchString,
+                    customer: this.filter.customerId,
+                    employee: this.filter.employeeId,
                     page: this.filter.page || 1,
                 }).then((response) => {
                     this.sales = response.data;
