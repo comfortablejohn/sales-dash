@@ -19,7 +19,8 @@ class SalesSeeder extends CSVSeeder
 
         $date = '';
         if (isset($row['date'])) {
-            $date = Carbon::createFromFormat('d/m/y', $row['date']);
+            // transform date to be recent (source data ends in July 2020)
+            $date = Carbon::createFromFormat('d/m/y', $row['date'])->addMonths(2);
         }
 
         return [
