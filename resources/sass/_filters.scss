@@ -1,4 +1,35 @@
 .filters {
     display: flex;
     flex-direction: row;
+    font-size: 16px;
+
+    .filter__input {
+        display: flex;
+        flex-direction: column;
+        label {
+            font-size: 12px;
+            font-weight: $fw-bold;
+            color: $grey-dark;
+        }
+        input {
+            padding: 8px 16px;
+        }
+    }
+}
+
+.date-range-filter {
+    form {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .filter__input {
+        flex-basis: 50%;
+        margin-bottom: 8px;
+    }
+
+    .date-range-picker {
+        display: flex;
+    }
 }

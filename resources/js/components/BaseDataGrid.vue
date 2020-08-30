@@ -23,6 +23,8 @@
             v-bind:pagination="pagination"
             v-on:next="handleNext"
             v-on:prev="handlePrev"
+            v-on:filter-employee="onEmployeeChange"
+            v-on:filter-customer="onCustomerChange"
         ></sales-grid>
     </div>
 </template>

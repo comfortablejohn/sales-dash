@@ -1,7 +1,7 @@
 <template>
     <div class="date-range-filter">
         <form @submit.prevent="updateDate()">
-            <div class="date-range-filter__from">
+            <div class="date-range-picker filter__input">
                 <label for="from-date">From</label>
                 <date-picker
                     format="yyyy-MM-dd"
@@ -10,7 +10,7 @@
                     v-model="from"
                 ></date-picker>
             </div>
-            <div class="date-range-filter__to">
+            <div class="date-range-picker filter__input">
                 <label for="to-date">To</label>
                 <date-picker
                     format="yyyy-MM-dd"
@@ -19,7 +19,10 @@
                     v-model="to"
                 ></date-picker>
             </div>
-            <button type="submit">Update</button>
+            <button
+                class="btn btn--primary"
+                type="submit"
+            >Update</button>
         </form>
     </div>
 </template>
@@ -54,6 +57,10 @@ export default {
             });
         },
         format(date) {
+            if (!date) {
+                return '';
+            }
+
             return moment(date).format('YYYY-MM-DD');
         }
     }

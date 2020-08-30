@@ -1,0 +1,17 @@
+button {
+    //background-color:
+    //border: none;
+}
+
+.btn {
+    border: none;
+    padding: 4px 8px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &--primary {
+        background-color: $green-light;
+    }
+}
+

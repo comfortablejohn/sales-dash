@@ -11,11 +11,12 @@
                     <th>Product</th>
                     <th>Customer</th>
                     <th>Sales Person</th>
-                    <th>Date</th>
+                    <th>Date ⩔</th>
                 </tr>
             </thead>
             <tbody>
                 <sales-grid-row-item
+                    v-on="$listeners"
                     v-for="sale in sales"
                     v-bind:sale="sale"
                     v-bind:key="sale.id"

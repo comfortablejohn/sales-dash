@@ -1,5 +1,5 @@
 <template>
-    <div class="search-input">
+    <div class="search-input filter__input">
         <label v-bind:for="inputId">{{ inputLabel }}</label>
         <input
             v-bind:id="inputId"

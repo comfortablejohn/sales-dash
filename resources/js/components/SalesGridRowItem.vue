@@ -2,8 +2,8 @@
     <tr class="grid-row grid-row__item">
         <td>{{ invoiceId }}</td>
         <td>{{ productName }}</td>
-        <td>{{ customerName }}</td>
-        <td>{{ employeeName }}</td>
+        <td @click="$emit('filter-customer', customerId)">{{ customerName }}</td>
+        <td @click="$emit('filter-employee', employeeId)">{{ employeeName }}</td>
         <td>{{ date }}</td>
     </tr>
 </template>
@@ -28,6 +28,12 @@ export default {
         },
         employeeName() {
             return this.sale.employee.name;
+        },
+        employeeId() {
+            return this.sale.employee.id;
+        },
+        customerId() {
+            return this.sale.customer.id;
         },
         date() {
             return this.sale.date;

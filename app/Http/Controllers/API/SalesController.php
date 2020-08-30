@@ -17,8 +17,8 @@ class SalesController extends Controller
                 'page' => 'int',
                 'employee' => 'exists:App\Employees,id',
                 'customer' => 'exists:App\Customers,id',
-                'to' => 'date|before_or_equal:today|date_format:Y-m-d',
-                'from' => 'date|before_or_equal:to|date_format:Y-m-d',
+                'to' => 'date|date_format:Y-m-d',
+                'from' => 'date|date_format:Y-m-d',
             ]
         );
 
