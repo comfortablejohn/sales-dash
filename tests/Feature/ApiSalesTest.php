@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Customers;
+use App\Employees;
 use App\Sales;
 use Tests\TestCase;
 
@@ -45,4 +47,40 @@ class ApiSalesTest extends TestCase
         }
     }
 
+    public function test_results_include_sales_person()
+    {
+        $employee = factory(Employees::class)->create();
+        factory(Sales::class, 5)->create(
+            [
+                'employee_id' => $employee->id,
+            ]
+        );
+
+        $response = $this->get('api/sales');
+
+        $response->assertSuccessful();
+        $this->assertCount(5, $response->json());
+        foreach ($response->json() as $saleJson) {
+            $this->assertEquals($employee->name, $saleJson['sales_person']);
+        }
+    }
+
+    public function test_results_include_customer()
+    {
+        $customer = factory(Customers::class)->create();
+        factory(Sales::class, 5)->create(
+            [
+                'customer_id' => $customer->id,
+            ]
+        );
+
+        $response = $this->get('api/sales');
+
+        $response->assertSuccessful();
+        $this->assertCount(5, $response->json());
+        foreach ($response->json() as $saleJson) {
+            $this->assertEquals($customer->first_name, $saleJson['customer']['first_name']);
+            $this->assertEquals($customer->last_name, $saleJson['customer']['last_name']);
+        }
+    }
 }

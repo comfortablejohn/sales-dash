@@ -16,6 +16,20 @@ class Sales extends Model
     // Scopes
     //====================================================================
 
+    public function scopeWithEmployeeName(Builder $query)
+    {
+        $query->with(['employee' => function ($query) {
+            $query->select('id', 'name');
+        }]);
+    }
+
+    public function scopeWithCustomerName(Builder $query)
+    {
+        $query->with(['customer' => function ($query) {
+            $query->select('id', 'first_name');
+        }]);
+    }
+
     public function scopeByDateRange(Builder $query, Carbon $from, Carbon $to)
     {
         return $query

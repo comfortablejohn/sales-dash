@@ -15,7 +15,9 @@ function get(url, params={}) {
     if (keys.length) {
         const args = [];
         keys.forEach(key => {
-            args.push(`${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
+            if (params[key]) {
+                args.push(`${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
+            }
         })
         queryString += '?' + args.join('&');
     }
