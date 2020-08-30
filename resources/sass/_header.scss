@@ -1,0 +1,41 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 16px 32px;
+    align-items: baseline;
+
+    &__nav {
+        font-weight: $fw-bold;
+        a {
+            transition: color 0.1s ease-out;
+            &:visited {
+                color: inherit;
+            }
+            &:hover {
+                color: $green-base;
+            }
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+
+            li {
+                display: inline-block;
+            }
+
+            li:not(:first-child) {
+                margin-left: 64px;
+            }
+        }
+    }
+
+    &__logo {
+        h3 {
+            color: $blue-lighter;
+        }
+    }
+}
+
