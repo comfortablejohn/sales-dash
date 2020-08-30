@@ -14,8 +14,8 @@ class StatsDaily extends Controller
     {
         $request->validate(
             [
-                'to' => 'date|before_or_equal:today|date_format:Y-m-d',
-                'from' => 'date|before_or_equal:to|date_format:Y-m-d',
+                'to' => 'date|date_format:Y-m-d',
+                'from' => 'date|date_format:Y-m-d',
             ]
         );
 
