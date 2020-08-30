@@ -25,6 +25,7 @@ Vue.use(VueRouter);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 const routes = [
+    { path: '/', redirect: '/dashboard' },
     { path: '/dashboard', component: BaseDashboard },
     { path: '/data', component: BaseDataGrid },
 ];
