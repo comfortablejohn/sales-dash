@@ -2,8 +2,8 @@
     <div class="container">
         <h1 class="hidden">Dashboard</h1>
         <date-range
-            v-bind:initialFromDate="fromDate"
-            v-bind:initialToDate="toDate"
+            v-bind:initial-from-date="fromDate"
+            v-bind:initial-to-date="toDate"
             v-on:update-date="onDateChange"
         ></date-range>
         <base-sales-graph
