@@ -24,7 +24,7 @@ abstract class TestCase extends BaseTestCase
                 throw new \Exception("Key \"$key\" not found in response data");
             }
 
-            return $data[$key]->all();
+            return $data[$key];
         });
     }
 }
