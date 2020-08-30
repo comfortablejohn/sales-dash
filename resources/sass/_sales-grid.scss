@@ -54,7 +54,7 @@
             overflow: auto;
             tr {
                 &:not(:first-child) {
-                    border-top: 2px solid $grey-lighter;
+                    border-top: 2px solid $grey-white;
                 }
             }
 

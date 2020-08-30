@@ -3,18 +3,20 @@
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap;
-    padding: 16px 32px;
+    padding: 16px 0px;
     align-items: baseline;
 
     &__nav {
         font-weight: $fw-bold;
         a {
             transition: color 0.1s ease-out;
+            text-decoration: none;
             &:visited {
                 color: inherit;
             }
             &.is-active {
-                color: $green-dark;
+                //color: $green-dark;
+                border-bottom: 3px solid $green-light;
             }
 
             &:hover {
@@ -38,7 +40,7 @@
 
     &__logo {
         h3 {
-            color: $blue-lighter;
+            color: $green-light;
         }
     }
 }

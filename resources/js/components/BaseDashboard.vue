@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="page">
         <h1 class="hidden">Dashboard</h1>
         <date-range
             v-bind:initial-from-date="fromDate"

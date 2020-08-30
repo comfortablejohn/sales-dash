@@ -1,5 +1,5 @@
 <template>
-    <div class="page">
+    <div>
         Showing for {{ fromDate }} {{ toDate }}
         <sales-graph
             v-bind:totals-by-day="totalsByDay"
