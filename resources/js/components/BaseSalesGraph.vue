@@ -1,12 +1,15 @@
 <template>
     <div>
         Showing for {{ fromDate }} {{ toDate }}
-        <div v-if="state === states.LOADING">Loading</div>
-        <div v-else-if="state === states.READY">{{ totalsByDay }}</div>
+        <sales-graph
+            v-bind:totals-by-day="totalsByDay"
+        ></sales-graph>
     </div>
 </template>
 <script>
 import statsApi from '../services/statsApi';
+import SalesGraph from "./SalesGraph/SalesGraph";
+
 const states = {
     LOADING: "LOADING",
     READY: "READY",
@@ -14,6 +17,9 @@ const states = {
 };
 
 export default {
+    components: {
+        "sales-graph": SalesGraph,
+    },
     props: {
         fromDate: {
             type: String,
@@ -26,15 +32,15 @@ export default {
         return {
             states,
             state: states.LOADING,
-            totalsByDay: [],
+            totalsByDay: {},
         }
     },
     methods: {
         fetchDailySalesCount() {
             this.state = states.LOADING;
-            statsApi.dailySalesCount({ from: this.fromDate, to: this.toDate }).then((response) => {
+            statsApi.dailySalesCount({ from: this.fromDate, to: this.toDate }).then((totalsByDay) => {
                 this.state = states.READY;
-                this.totalsByDay = response;
+                this.totalsByDay = totalsByDay;
             })
         }
     },
