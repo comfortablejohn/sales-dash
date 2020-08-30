@@ -11,22 +11,7 @@
         <link href="/css/app.css" rel="stylesheet">
     </head>
     <body>
-        <div class="header">
-            <nav class="header__nav">
-                <ul>
-                    <a href="/dashboard">Dashboard</a>
-                    <a href="/data">Data Grid</a>
-                </ul>
-            </nav>
-            <div class="header__logo">
-                <h3>AG Sales</h3>
-            </div>
-        </div>
-        <div id="app">
-            <div>
-                @yield('body')
-            </div>
-        </div>
+        @yield('body')
         <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>
