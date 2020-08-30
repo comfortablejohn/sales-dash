@@ -10,6 +10,7 @@
             <div class="entity-filters">
                 <div>
                     <search-input
+                        v-bind:api="employeesApi"
                         v-on:on-change="onEmployeeChange"
                         input-label="Employee"
                         input-id="employee"
@@ -22,6 +23,7 @@
                 </div>
                 <div>
                     <search-input
+                        v-bind:api="customersApi"
                         v-on:on-change="onCustomerChange"
                         input-label="Customer"
                         input-id="customer"
@@ -50,6 +52,8 @@
     import SearchInput from "./SearchInput";
     import {getSales} from "../services/salesApi";
     import SalesGrid from "./SalesGrid";
+    import customersApi from "../services/customersApi";
+    import employeesApi from "../services/employeesApi";
 
     const states = {
         LOADING: "LOADING",
@@ -70,7 +74,9 @@
                     employee: {},
                     customer: {},
                 },
-                pagination: {}
+                pagination: {},
+                customersApi,
+                employeesApi,
             };
         },
         components: {

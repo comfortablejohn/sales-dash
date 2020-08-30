@@ -29,6 +29,7 @@ Route::group(['prefix' => 'customers'], function () {
 
 Route::group(['prefix' => 'employees'], function () {
     Route::get('/{employee}/sales', 'API\EmployeeSalesController@index');
+    Route::get('/search', 'API\EmployeesSearchController@index');
 });
 
 Route::group(['prefix' => 'stats'], function () {

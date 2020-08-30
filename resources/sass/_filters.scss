@@ -9,6 +9,7 @@
         flex-direction: column;
         margin-bottom: 8px;
         flex-basis: 50%;
+        position: relative;
 
         label {
             font-size: 12px;
@@ -20,7 +21,23 @@
             padding: 8px 16px;
             border: none;
         }
+        .autocomplete-input {
+            background-color: #fff;
+            background-image: none;
+            border-radius: 0;
+            font-size: 1em;
+            line-height: 1.15;
+        }
     }
+}
+
+.autocomplete-result-list {
+    z-index: 999;
+}
+
+.autocomplete-result {
+    background-color: #fff;
+    list-style: none;
 }
 
 .entity-filters {

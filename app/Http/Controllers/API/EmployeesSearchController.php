@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Customers;
+use App\Employees;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomersSearchResource;
 use Illuminate\Http\Request;
 
-class CustomersSearchController extends Controller
+class EmployeesSearchController extends Controller
 {
     public function index(Request $request)
     {
@@ -17,7 +18,7 @@ class CustomersSearchController extends Controller
             ]
         );
         $searchParam = $request->get('s');
-        $customers = Customers::select(['id', 'first_name', 'last_name'])->searchByName($searchParam)->get();
-        return response()->json(CustomersSearchResource::collection($customers));
+        $employees = Employees::select(['id', 'name'])->searchByName($searchParam)->get();
+        return response()->json($employees);
     }
 }

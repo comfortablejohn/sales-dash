@@ -1,23 +1,38 @@
 <template>
     <div class="search-input filter__input">
         <label v-bind:for="inputId">{{ inputLabel }}</label>
-        <input
-            v-bind:id="inputId"
-            v-bind:placeholder="placeholder"
-            v-model="searchString"
-            @keydown="handleInputDebounced"
-        />
+        <auto-complete
+            v-bind:search="search"
+            placeholder="Search by employee name"
+            aria-label="Search by employee name"
+            v-bind:debounce-time="200"
+            v-bind:get-result-value="getResultValue"
+            @submit="handleSubmit"
+        >
+            <template #result="{ result, props }">
+                <li
+                    v-bind="props"
+                    class="autocomplete-result"
+                >
+                    <div class="">
+                        {{ result.name }}
+                    </div>
+                </li>
+            </template>
+        </auto-complete>
     </div>
 </template>
 <script>
-import { debounce } from 'lodash';
+import Autocomplete from '@trevoreyre/autocomplete-vue'
 export default {
-    data() {
-        return {
-            searchString: "",
-        };
+    components: {
+        'auto-complete': Autocomplete,
     },
     props: {
+        api: {
+            required: true,
+            type: Object,
+        },
         inputId: {
             required: true,
             type: String,
@@ -33,9 +48,18 @@ export default {
         }
     },
     methods: {
-        handleInputDebounced: debounce(function() {
-            this.$emit('on-change', this.searchString);
-        }, 350)
+        search(searchString) {
+            if (searchString.length < 3) {
+                return Promise.resolve([]);
+            }
+            return this.api.search(searchString);
+        },
+        getResultValue(result) {
+            return result.name
+        },
+        handleSubmit(result) {
+            this.$emit('on-change', result);
+        }
     },
 }
 </script>
