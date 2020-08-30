@@ -22,7 +22,7 @@
             <button
                 class="btn btn--primary"
                 type="submit"
-            >Update</button>
+            >Filter Date Range</button>
         </form>
     </div>
 </template>

@@ -65,6 +65,13 @@
                     padding-left: 16px;
                 }
 
+                .actionable {
+                    font-weight: $fw-bold;
+                    cursor: pointer;
+                    &:hover {
+                        color: $green-base;
+                    }
+                }
             }
         }
 

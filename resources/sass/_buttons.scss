@@ -13,5 +13,10 @@ button {
     &--primary {
         background-color: $green-light;
     }
+
+    &--outline {
+        background-color: transparent;
+        border: 2px solid $green-base;
+    }
 }
 

@@ -7,16 +7,32 @@
                 v-bind:initial-to-date="filter.toDate"
                 v-on:update-date="onDateChange"
             ></date-range>
-            <search-input
-                v-on:on-change="onEmployeeChange"
-                input-label="Employee"
-                input-id="employee"
-            ></search-input>
-            <search-input
-                v-on:on-change="onCustomerChange"
-                input-label="Customer"
-                input-id="customer"
-            ></search-input>
+            <div class="entity-filters">
+                <div>
+                    <search-input
+                        v-on:on-change="onEmployeeChange"
+                        input-label="Employee"
+                        input-id="employee"
+                    ></search-input>
+                    <button class="btn btn--outline filter-pill"
+                        v-if="filter.employee.id"
+                        @click="onEmployeeChange" >
+                        &times; {{ filter.employee.name }}
+                    </button>
+                </div>
+                <div>
+                    <search-input
+                        v-on:on-change="onCustomerChange"
+                        input-label="Customer"
+                        input-id="customer"
+                    ></search-input>
+                    <button class="btn btn--outline filter-pill"
+                            v-if="filter.customer.id"
+                            @click="onCustomerChange" >
+                        &times; {{ filter.customer.name }}
+                    </button>
+                </div>
+            </div>
         </div>
         <sales-grid
             v-bind:sales="sales"
@@ -51,8 +67,8 @@
                     page: 1,
                     fromDate: "",
                     toDate: "",
-                    employeeId: "",
-                    customerId: "",
+                    employee: {},
+                    customer: {},
                 },
                 pagination: {}
             };
@@ -79,13 +95,11 @@
                 this.setFilter('fromDate', dates.from);
                 this.setFilter('toDate', dates.to);
             },
-            onEmployeeChange(employeeId) {
-                console.log('update employee');
-                console.log(employeeId);
-                this.setFilter('employeeId', employeeId);
+            onEmployeeChange(employee) {
+                this.setFilter('employee', employee);
             },
-            onCustomerChange(customerId) {
-                this.setFilter('customerId', customerId);
+            onCustomerChange(customer) {
+                this.setFilter('customer', customer);
             },
             setFilter(key, value) {
                 const newFilterData = {};
@@ -103,8 +117,8 @@
                 getSales({
                     from: this.filter.fromDate,
                     to: this.filter.toDate,
-                    customer: this.filter.customerId,
-                    employee: this.filter.employeeId,
+                    customer: this.filter.customer.id,
+                    employee: this.filter.employee.id,
                     page: this.filter.page || 1,
                 }).then((response) => {
                     this.sales = response.data;
