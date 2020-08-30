@@ -6,7 +6,6 @@ use App\Sales;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
 {
@@ -16,6 +15,8 @@ class SalesController extends Controller
         $request->validate(
             [
                 'page' => 'int',
+                'employee' => 'exists:App\Employees,id',
+                'customer' => 'exists:App\Customers,id',
                 'to' => 'date|before_or_equal:today|date_format:Y-m-d',
                 'from' => 'date|before_or_equal:to|date_format:Y-m-d',
             ]
@@ -27,9 +28,18 @@ class SalesController extends Controller
             $from = Carbon::parse($request->get('from'));
             $query->where('date', '>=', $from->startOfDay());
         }
+
         if ($request->has('to')) {
             $to = Carbon::parse($request->get('to'));
             $query->where('date', '<=', $to->endOfDay());
+        }
+
+        if ($request->has('employee')) {
+            $query->where('employee_id', $request->get('employee'));
+        }
+
+        if ($request->has('customer')) {
+            $query->where('customer_id', $request->get('customer'));
         }
 
         $sales = $query->orderBy('date', 'desc')->paginate(100);
