@@ -8,7 +8,7 @@
                 </ul>
             </nav>
             <div class="header__logo">
-                <h3>AG Sales</h3>
+                <h3>Sales Demo</h3>
             </div>
         </div>
         <router-view></router-view>
