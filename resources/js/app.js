@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import BaseApp from './components/BaseApp';
 import BaseDashboard from './components/BaseDashboard'
 import BaseDataGrid from './components/BaseDataGrid'
+require('./bootstrap');
 
 Vue.use(VueRouter);
 // /**

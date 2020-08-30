@@ -26,5 +26,10 @@
         "vue": "^2.5.17",
         "vue-router": "^3.4.3",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+        "@babel/plugin-transform-destructuring": "^7.10.4",
+        "@babel/plugin-transform-template-literals": "^7.10.5"
     }
 }
