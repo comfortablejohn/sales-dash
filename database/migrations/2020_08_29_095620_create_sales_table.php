@@ -23,6 +23,7 @@ class CreateSalesTable extends Migration
             $table->unsignedBigInteger('employee_id');
 
             $table->date('date');
+            $table->index(['date', 'invoice_id']);
 
             $table->timestamps();
         });

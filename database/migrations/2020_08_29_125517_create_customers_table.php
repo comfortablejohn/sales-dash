@@ -25,6 +25,8 @@ class CreateCustomersTable extends Migration
             $table->string('street')->nullable();
             $table->string('city')->nullable();
 
+            $table->index(['first_name', 'last_name']);
+
             $table->timestamps();
         });
     }

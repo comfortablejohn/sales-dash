@@ -45,7 +45,7 @@ class SalesController extends Controller
             $query->where('customer_id', $request->get('customer'));
         }
 
-        $sales = $query->orderBy('date', 'desc')->paginate(100);
+        $sales = $query->orderBy('date', 'desc')->orderBy('invoice_id', 'desc')->paginate(100);
 
         return SalesDataResource::collection($sales);
     }
