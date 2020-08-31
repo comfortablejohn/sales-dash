@@ -39,8 +39,7 @@
         <sales-grid
             v-bind:sales="sales"
             v-bind:pagination="pagination"
-            v-on:next="handleNext"
-            v-on:prev="handlePrev"
+            v-on:change-page="handlePageChange"
             v-on:filter-employee="onEmployeeChange"
             v-on:filter-customer="onCustomerChange"
         ></sales-grid>
@@ -85,16 +84,10 @@
             'sales-grid': SalesGrid,
         },
         methods: {
-            handleNext() {
-                console.log('next')
-                if (this.filter.page < this.pagination.lastPage) {
-                    this.setFilter('page', this.filter.page + 1);
-                }
-            },
-            handlePrev() {
-                console.log('prev')
-                if (this.filter.page > 1) {
-                    this.setFilter('page', this.filter.page - 1);
+            handlePageChange(page) {
+                console.log('change page ' + page);
+                if (page > 0 && page <= this.pagination.lastPage) {
+                    this.setFilter('page', page);
                 }
             },
             onDateChange(dates) {

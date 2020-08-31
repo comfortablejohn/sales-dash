@@ -21,10 +21,18 @@
         nav {
             display: flex;
             flex-direction: row;
+            align-items: baseline;
             flex-wrap: nowrap;
 
             > :not(:first-child) {
                 margin-left: 8px;
+            }
+            a {
+                &.disabled {
+                    cursor: default;
+                    color: $grey-light;
+                }
+                color: inherit;
             }
         }
     }
