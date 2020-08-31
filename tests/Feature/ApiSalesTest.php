@@ -17,7 +17,7 @@ class ApiSalesTest extends TestCase
         $response = $this->get('/api/sales');
 
         $response->assertSuccessful();
-        $this->assertCount(count($sales), $response->json());
+        $this->assertCount(count($sales), $response->json()['data']);
     }
 
     public function test_sales_ordered_by_date_by_default()
@@ -39,7 +39,7 @@ class ApiSalesTest extends TestCase
         $lastDate = "";
 
         $response->assertSuccessful();
-        foreach ($response->json() as $saleJson) {
+        foreach ($response->json()['data'] as $saleJson) {
             if ($lastDate) {
                 $this->assertLessThanOrEqual($lastDate, $saleJson['date']);
             }
@@ -47,7 +47,7 @@ class ApiSalesTest extends TestCase
         }
     }
 
-    public function test_results_include_sales_person()
+    public function test_results_include_employee()
     {
         $employee = factory(Employees::class)->create();
         factory(Sales::class, 5)->create(
@@ -59,9 +59,9 @@ class ApiSalesTest extends TestCase
         $response = $this->get('api/sales');
 
         $response->assertSuccessful();
-        $this->assertCount(5, $response->json());
-        foreach ($response->json() as $saleJson) {
-            $this->assertEquals($employee->name, $saleJson['sales_person']);
+        $this->assertCount(5, $response->json()['data']);
+        foreach ($response->json()['data'] as $saleJson) {
+            $this->assertEquals($employee->name, $saleJson['employee']['name']);
         }
     }
 
@@ -77,8 +77,8 @@ class ApiSalesTest extends TestCase
         $response = $this->get('api/sales');
 
         $response->assertSuccessful();
-        $this->assertCount(5, $response->json());
-        foreach ($response->json() as $saleJson) {
+        $this->assertCount(5, $response->json()['data']);
+        foreach ($response->json()['data'] as $saleJson) {
             $this->assertEquals($customer->first_name, $saleJson['customer']['first_name']);
             $this->assertEquals($customer->last_name, $saleJson['customer']['last_name']);
         }

@@ -16,7 +16,8 @@ class CustomersSearchController extends Controller
                 's' => 'string|required'
             ]
         );
-        $searchParam = $request->get('s');
+        // decode any spaces or special characters
+        $searchParam = urldecode($request->get('s'));
         $customers = Customers::select(['id', 'first_name', 'last_name'])->searchByName($searchParam)->get();
         return response()->json(CustomersSearchResource::collection($customers));
     }

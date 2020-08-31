@@ -23,7 +23,7 @@ class Customers extends Model
     public function scopeSearchByName(Builder $query, string $searchString)
     {
         $upperCaseString = trim(strtoupper($searchString));
-        return $query->whereRaw("UPPER(customers.first_name) LIKE '%" . $upperCaseString . "%'")
-            ->orWhereRaw("UPPER(customers.last_name) LIKE '%" . $upperCaseString . "%'");
+        $wildCarded = "%$upperCaseString%";
+        $query->whereRaw("UPPER(CONCAT(customers.first_name, ' ', customers.last_name)) LIKE ?", $wildCarded)->toSql();
     }
 }

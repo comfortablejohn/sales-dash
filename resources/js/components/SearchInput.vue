@@ -3,7 +3,7 @@
         <label v-bind:for="inputId">{{ inputLabel }}</label>
         <auto-complete
             v-bind:search="search"
-            placeholder="Search by employee name"
+            placeholder="Search by name"
             aria-label="Search by employee name"
             v-bind:debounce-time="200"
             v-bind:get-result-value="getResultValue"

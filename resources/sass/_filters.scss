@@ -32,7 +32,7 @@
 }
 
 .autocomplete-result-list {
-    z-index: 999;
+    z-index: 999 !important;
 }
 
 .autocomplete-result {
@@ -57,7 +57,6 @@
     }
 }
 
-//.search-input {
 //    display: flex;
 //    flex-direction: column;
 //}
