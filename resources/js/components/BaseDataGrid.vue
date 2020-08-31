@@ -122,11 +122,11 @@
                 }).then((response) => {
                     this.sales = response.data;
                     this.pagination = {
-                        currentPage: response.current_page,
-                        lastPage: response.last_page,
-                        from: response.from,
-                        to: response.to,
-                        total: response.total,
+                        currentPage: response.meta.current_page,
+                        lastPage: response.meta.last_page,
+                        from: response.meta.from,
+                        to: response.meta.to,
+                        total: response.meta.total,
                     };
                 });
             }

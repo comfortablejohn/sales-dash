@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Resources\SalesDataResource;
 use App\Sales;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
 {
@@ -22,7 +24,8 @@ class SalesController extends Controller
             ]
         );
 
-        $query = Sales::with(["employee:id,name","customer:id,first_name,last_name","product:id,name"]);
+        $query = Sales::with(["employee:id,name","product:id,name"])
+            ->withCustomerNames();
 
         if ($request->has('from')) {
             $from = Carbon::parse($request->get('from'));
@@ -43,6 +46,7 @@ class SalesController extends Controller
         }
 
         $sales = $query->orderBy('date', 'desc')->paginate(100);
-        return response()->json($sales);
+
+        return SalesDataResource::collection($sales);
     }
 }

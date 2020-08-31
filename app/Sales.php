@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class Sales extends Model
 {
@@ -41,6 +42,15 @@ class Sales extends Model
     public function scopeByEmployee(Builder $query, Employees $employee)
     {
         return $query->where('employee_id', $employee->id);
+    }
+
+    public function scopeWithCustomerNames(Builder $query)
+    {
+        // need to make select explicit now
+        $query
+            ->select('sales.id','customer_id','product_id','employee_id','date','invoice_id')
+            ->addSelect(DB::raw("customers.first_name as customer_first_name, customers.last_name as customer_last_name"))
+            ->leftJoin('customers', 'customers.id', 'customer_id');
     }
 
     //====================================================================
